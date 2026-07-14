@@ -1,15 +1,35 @@
-const items = [
-  {id:  1, sku: "Widget-01", description: "Steel Widget", unitCost: 10.0, quantityOnHand: 100},
-  {id:  2, sku: "Widget-02", description: "Steel Bolt", unitCost: 5.0, quantityOnHand: 100},
-  {id:  3, sku: "Widget-03", description: "Steel Screw", unitCost: 4.0, quantityOnHand: 100},
-];
+import {useState, useEffect} from "react";
 
 export default function App(){
+  const [items, setItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    fetch("http://localhost:8080/api/items")
+     .then((res) => {
+      if(!res.ok) throw new Error('Request Failed: ${res.status}');
+      return res.json();
+      })
+      .then((data) => setItems(data))
+      .catch((err) => setError(err.message))
+      .finally(() => setLoading(false)); 
+  }, []);
+
   return(
     <div callName="min-h-screen bg-gray-50 p-8">
       <div className="mx-auto max-w-3xl">
         <h1 className="text-2xl font-bold text-gray-900 mb-1">Landed Cost Dashboard</h1>
         <p className="text-gray-5600 mb-6">Inventory items</p>
+
+        {loading && <p>Loading...</p>}
+        {error && <p className="text-red-500">Error: {error}</p>}
+        
+
+        {!loading && !error && items.length === 0 && (
+          <p>No items to display</p>
+        )}
+
+        {!loading && !error && items.length > 0 && (
 
         <table className="w-full bg-white rounded-lg shadow overflow-hidden">
           <thead className="bg-gray-100 text-left text-sm text-gray-600">
@@ -34,6 +54,7 @@ export default function App(){
           </tbody>
 
         </table>
+        )}
       </div>
     </div>
   );
