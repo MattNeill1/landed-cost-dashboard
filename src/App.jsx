@@ -1,4 +1,5 @@
 import {useState, useEffect} from "react";
+import ShipmentForm from "./ShipmentForm";
 
 const emptyForm = { sku: "", description: "", unitCost: "", quantityOnHand: "" };
 
@@ -134,6 +135,8 @@ export default function App(){
             Submit
           </button>
         </form>
+
+        <ShipmentForm items={items}/>
 
 
         {loading && <p>Loading...</p>}
