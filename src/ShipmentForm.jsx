@@ -1,4 +1,5 @@
 import {useState, useEffect} from "react";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
 export default function ShipmentForm({ items = [] }) {
     const [shipment, setShipment] = useState({
@@ -178,6 +179,7 @@ export default function ShipmentForm({ items = [] }) {
                   </button>
                 </td>
               </tr>
+              
 
             ))}
           </tbody>
@@ -264,12 +266,15 @@ export default function ShipmentForm({ items = [] }) {
         <div className="mt-4">
           <button type="submit">Create Shipment</button>
         </div>
+    
         {error && <p className="text-red-600 mt-2">{error}</p>}
         {shipmentId && <p className="text-green-600 mt-2">Shipment created with ID: {shipmentId}</p>}
-        {selectedShipmentId && <h3 className="font-semibold mt-4">Allocation for shipment {selectedShipmentId} and method {selectedAllocationMethod}</h3>}
 
+      </form>
+        {selectedShipmentId && <h3 className="font-semibold mt-4">Allocation for shipment {selectedShipmentId} and method {selectedAllocationMethod}</h3>}
+    
         {allocations.length > 0 && (
-          
+          <>
           <table className="mt-4 w-full text-sm border-collapse">
             <thead>
               <tr className="bg-gray-200">
@@ -289,9 +294,17 @@ export default function ShipmentForm({ items = [] }) {
               ))}
             </tbody>
           </table>
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={allocations} margin={{ top: 5, right: 30, left: 5, bottom: 5 }} >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="itemSku" />
+              <YAxis />
+              <Tooltip />
+              <Bar dataKey="allocatedCost" fill="#3b82f6" />
+            </BarChart>
+          </ResponsiveContainer>
+          </>
         )}
-     
-    </form>
     </div>
 
     );

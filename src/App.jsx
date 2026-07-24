@@ -136,9 +136,6 @@ export default function App(){
           </button>
         </form>
 
-        <ShipmentForm items={items}/>
-
-
         {loading && <p>Loading...</p>}
         {error && <p className="text-red-500">Error: {error}</p>}
         
@@ -173,6 +170,8 @@ export default function App(){
 
         </table>
         )}
+
+        <ShipmentForm items={items}/>
       </div>
     </div>
   );
