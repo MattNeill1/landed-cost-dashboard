@@ -20,6 +20,10 @@ export default function ShipmentForm({ items = [] }) {
     const [shipments, setShipments] = useState([]);
 
     const [selectedShipmentId, setSelectedShipmentId] = useState(null);
+
+    const [selectedAllocationMethod, setSelectedAllocationMethod] = useState(null);
+
+
     
     useEffect(() => {
         fetch("http://localhost:8080/api/shipments")
@@ -49,11 +53,21 @@ export default function ShipmentForm({ items = [] }) {
         );
     }
 
-    async function viewAllocations(shipmentId){
+    function handleExistingShipmentChange(id, e){
+        const {name, value} = e.target;
+        setShipments((prev) => 
+            prev.map((shipment, i) =>
+                shipment.id === id ? {...shipment, [name]: e.target.value} : shipment
+            )
+        );
+    }
+
+    async function viewAllocations(shipmentId, allocationMethod){
         setError(null);
         setSelectedShipmentId(shipmentId);
+        setSelectedAllocationMethod(allocationMethod);
         try {
-            const response = await fetch(`http://localhost:8080/api/shipments/${shipmentId}/allocation`);
+            const response = await fetch(`http://localhost:8080/api/shipments/${shipmentId}/allocation?method=${allocationMethod}`);
             if (!response.ok) {
               const body = await response.json().catch(() => ({}));
                 throw new Error(body.error || `Allocation fetch failed: ${response.status}`);
@@ -137,17 +151,27 @@ export default function ShipmentForm({ items = [] }) {
           </thead>
 
           <tbody className="text-sm text-gray-800">
-            {shipments.map((shipment)=>(
-              <tr key={shipment.id} className="border-t border-gray-100">
-                <td className="px-4 py-3 font-medium">{shipment.shipmentNumber}</td>
-                <td className="px-4 py-3">{shipment.freightCost}</td>
-                <td className="px-4 py-3 text-right">{shipment.dutyCost}</td>
-                <td className="px-4 py-3 text-right">{shipment.insuranceCost}</td>
-                <td className="px-4 py-3 text-right">{shipment.allocationMethod}</td>
+            {shipments.map((existingShipment)=>(
+              <tr key={existingShipment.id} className="border-t border-gray-100">
+                <td className="px-4 py-3 font-medium">{existingShipment.shipmentNumber}</td>
+                <td className="px-4 py-3">{existingShipment.freightCost}</td>
+                <td className="px-4 py-3 text-right">{existingShipment.dutyCost}</td>
+                <td className="px-4 py-3 text-right">{existingShipment.insuranceCost}</td>
+                <td className="px-4 py-3 text-right">
+                  <select
+                    name="allocationMethod"
+                    value={existingShipment.allocationMethod}
+                    onChange={(e) => handleExistingShipmentChange(existingShipment.id, e)}
+                  >
+                    <option value="VALUE">VALUE</option>
+                    <option value="WEIGHT">WEIGHT</option>
+                    <option value="QUANTITY">QUANTITY</option>
+                  </select>
+                </td>
                 <td className="px-4 py-3 text-right"> 
                   <button
                     type="button"
-                    onClick={() => viewAllocations(shipment.id)}
+                    onClick={() => viewAllocations(existingShipment.id, existingShipment.allocationMethod)}
                     className="text-blue-500 hover:text-blue-700"
                   >
                     View Allocations
@@ -242,7 +266,7 @@ export default function ShipmentForm({ items = [] }) {
         </div>
         {error && <p className="text-red-600 mt-2">{error}</p>}
         {shipmentId && <p className="text-green-600 mt-2">Shipment created with ID: {shipmentId}</p>}
-        {selectedShipmentId && <h3 className="font-semibold mt-4">Allocation for shipment {selectedShipmentId}</h3>}
+        {selectedShipmentId && <h3 className="font-semibold mt-4">Allocation for shipment {selectedShipmentId} and method {selectedAllocationMethod}</h3>}
 
         {allocations.length > 0 && (
           
