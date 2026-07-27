@@ -1,6 +1,7 @@
 import {useState, useEffect} from "react";
 import ItemForm from "./ItemForm";
 import ShipmentForm from "./ShipmentForm";
+import { API_URL } from "./api";
 
 export default function App(){
 
@@ -9,7 +10,7 @@ export default function App(){
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/items")
+    fetch(`${API_URL}/api/items`)
      .then((res) => {
       if(!res.ok) throw new Error(`Request Failed: ${res.status}`);
       return res.json();

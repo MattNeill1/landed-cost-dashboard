@@ -1,4 +1,5 @@
 import {useState} from "react";
+import { API_URL } from "./api";
 
 const emptyForm = { sku: "", description: "", unitCost: "", quantityOnHand: "" };
 
@@ -16,7 +17,7 @@ export default function ItemForm({ items, setItems, loading, error, setError }) 
 
   function handleSubmit(e){
     e.preventDefault();
-    fetch("http://localhost:8080/api/items", {
+    fetch(`${API_URL}/api/items`, {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify({

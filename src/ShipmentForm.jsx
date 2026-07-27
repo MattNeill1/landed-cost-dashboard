@@ -1,5 +1,6 @@
 import {useState, useEffect} from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
+import { API_URL } from "./api";
 
 export default function ShipmentForm({ items = [] }) {
     const [shipment, setShipment] = useState({
@@ -29,7 +30,7 @@ export default function ShipmentForm({ items = [] }) {
 
     
     useEffect(() => {
-        fetch("http://localhost:8080/api/shipments")
+        fetch(`${API_URL}/api/shipments`)
         .then((res) => {
             if(!res.ok) throw new Error(`Request Failed: ${res.status}`);
             return res.json();
@@ -70,7 +71,7 @@ export default function ShipmentForm({ items = [] }) {
         setSelectedShipmentId(shipmentId);
         setSelectedAllocationMethod(allocationMethod);
         try {
-            const response = await fetch(`http://localhost:8080/api/shipments/${shipmentId}/allocation?method=${allocationMethod}`);
+            const response = await fetch(`${API_URL}/api/shipments/${shipmentId}/allocation?method=${allocationMethod}`);
             if (!response.ok) {
               const body = await response.json().catch(() => ({}));
                 throw new Error(body.error || `Allocation fetch failed: ${response.status}`);
@@ -99,7 +100,7 @@ export default function ShipmentForm({ items = [] }) {
         };
         console.log(JSON.stringify(payload, null, 2));
         try {
-          const response = await fetch("http://localhost:8080/api/shipments", {
+          const response = await fetch(`${API_URL}/api/shipments`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
