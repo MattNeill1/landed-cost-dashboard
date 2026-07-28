@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, Fragment} from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { API_URL } from "./api";
 
@@ -219,9 +219,9 @@ export default function ShipmentForm({ items = [] }) {
 
       <h3 className="text-gray-700 text-sm font-bold mb-2 mt-2">Lines</h3>
       {lines.map((line, index) => (
-        <div key={index} className="flex gap-2 mb-3 items-center bg-gray-50 p-3 rounded">
+        <div key={index} className="flex flex-wrap gap-2 mb-3 items-center bg-gray-50 p-3 rounded">
           <select
-            className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline flex-1"
+            className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline flex-1 min-w-0"
             name="itemId"
             placeholder="Item ID"
             value={line.itemId}
@@ -251,7 +251,7 @@ export default function ShipmentForm({ items = [] }) {
             onChange={(e) => handleLineChange(index, e)}
           />
           <button
-            className="text-red-500 hover:text-red-700 text-sm font-bold py-2 px-3"
+            className="text-red-500 hover:text-red-700 text-sm font-bold py-2 px-3 shrink-0"
             type="button"
             onClick={() => removeLine(index)}
           >
@@ -306,8 +306,8 @@ export default function ShipmentForm({ items = [] }) {
 
           <tbody className="text-sm text-gray-800">
             {shipments.map((existingShipment)=>(
-            <>
-              <tr key={existingShipment.id} className="border-t border-gray-100">
+            <Fragment key={existingShipment.id}>
+              <tr className="border-t border-gray-100">
                 <td className="px-4 py-3 font-medium">{existingShipment.shipmentNumber}</td>
                 <td className="px-4 py-3">{existingShipment.freightCost}</td>
                 <td className="px-4 py-3 text-right">{existingShipment.dutyCost}</td>
@@ -348,7 +348,7 @@ export default function ShipmentForm({ items = [] }) {
                 </td>
               </tr>
               {expandedShipmentIds.has(existingShipment.id) && (
-                <tr key={`${existingShipment.id}-lines`} className="bg-gray-50">
+                <tr className="bg-gray-50">
                   <td colSpan="6" className="px-4 py-3">
                     <table className="w-full text-sm text-gray-800">
                       <thead>
@@ -360,7 +360,7 @@ export default function ShipmentForm({ items = [] }) {
                       </thead>
                       <tbody>
                         {existingShipment.shipmentLines.map((line) => (
-                          <tr key={line.itemId} className="border-t border-gray-100">
+                          <tr key={line.id} className="border-t border-gray-100">
                             <td className="px-2 py-1">{line.item.sku} - {line.item.description}</td>
                             <td className="px-2 py-1 text-right">{line.quantity}</td>
                             <td className="px-2 py-1 text-right">{line.weight}</td>
@@ -371,7 +371,7 @@ export default function ShipmentForm({ items = [] }) {
                   </td>
                 </tr>
               )}
-            </>
+            </Fragment>
             ))}
           </tbody>
 
