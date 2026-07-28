@@ -147,74 +147,75 @@ export default function ShipmentForm({ items = [] }) {
       <form className="bg-blue-50 p-6 rounded-lg shadow border border-blue-100" onSubmit={handleSubmit}>
       <h2 className="text-lg font-bold mb-4 text-gray-900">New Shipment</h2>
 
-      <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="shipmentNumber">
-          Shipment Number
-        </label>
-        <input
-          className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full"
-          id="shipmentNumber"
-          name="shipmentNumber"
-          placeholder="Shipment number"
-          value={shipment.shipmentNumber}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="freightCost">
-          Freight Cost
-        </label>
-        <input
-          className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full"
-          id="freightCost"
-          name="freightCost"
-          placeholder="Freight cost"
-          value={shipment.freightCost}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="dutyCost">
-          Duty Cost
-        </label>
-        <input
-          className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full"
-          id="dutyCost"
-          name="dutyCost"
-          placeholder="Duty cost"
-          value={shipment.dutyCost}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="insuranceCost">
-          Insurance Cost
-        </label>
-        <input
-          className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full"
-          id="insuranceCost"
-          name="insuranceCost"
-          placeholder="Insurance cost"
-          value={shipment.insuranceCost}
-          onChange={handleChange}
-        />
-      </div>
-
-      <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="allocationMethod">
-          Allocation Method
-        </label>
-        <select
-          className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full"
-          id="allocationMethod"
-          name="allocationMethod"
-          value={shipment.allocationMethod}
-          onChange={handleChange}
-        >
-          <option value="VALUE">VALUE</option>
-          <option value="WEIGHT">WEIGHT</option>
-          <option value="QUANTITY">QUANTITY</option>
-        </select>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+        <div className="sm:col-span-2">
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="shipmentNumber">
+            Shipment Number
+          </label>
+          <input
+            className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full"
+            id="shipmentNumber"
+            name="shipmentNumber"
+            placeholder="Shipment number"
+            value={shipment.shipmentNumber}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="freightCost">
+            Freight Cost
+          </label>
+          <input
+            className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full"
+            id="freightCost"
+            name="freightCost"
+            placeholder="Freight cost"
+            value={shipment.freightCost}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="dutyCost">
+            Duty Cost
+          </label>
+          <input
+            className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full"
+            id="dutyCost"
+            name="dutyCost"
+            placeholder="Duty cost"
+            value={shipment.dutyCost}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="insuranceCost">
+            Insurance Cost
+          </label>
+          <input
+            className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full"
+            id="insuranceCost"
+            name="insuranceCost"
+            placeholder="Insurance cost"
+            value={shipment.insuranceCost}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="allocationMethod">
+            Allocation Method
+          </label>
+          <select
+            className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full"
+            id="allocationMethod"
+            name="allocationMethod"
+            value={shipment.allocationMethod}
+            onChange={handleChange}
+          >
+            <option value="VALUE">VALUE</option>
+            <option value="WEIGHT">WEIGHT</option>
+            <option value="QUANTITY">QUANTITY</option>
+          </select>
+        </div>
       </div>
 
       <h3 className="text-gray-700 text-sm font-bold mb-2 mt-2">Lines</h3>

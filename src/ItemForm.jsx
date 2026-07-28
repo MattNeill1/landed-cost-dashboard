@@ -44,65 +44,67 @@ export default function ItemForm({ items, setItems, loading, error, setError }) 
     <>
       <form onSubmit={handleSubmit} className="bg-blue-50 p-6 rounded-lg shadow border border-blue-100">
         <h2 className="text-lg font-bold mb-4 text-gray-900">New Item</h2>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="sku">
-            SKU
-          </label>
-          <input
-            className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full"
-            id="sku"
-            name="sku"
-            type="text"
-            placeholder="Enter SKU"
-            value={form.sku}
-            onChange={handleChange}
-          />
-          {errors.sku && <p className="text-red-600 text-sm mt-1">{errors.sku}</p>}
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
-            Description
-          </label>
-          <input
-            className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full"
-            id="description"
-            name="description"
-            type="text"
-            placeholder="Enter description"
-            value={form.description}
-            onChange={handleChange}
-          />
-          {errors.description && <p className="text-red-600 text-sm mt-1">{errors.description}</p>}
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="unitCost">
-            Unit Cost
-          </label>
-          <input
-            className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full"
-            id="unitCost"
-            name="unitCost"
-            type="number"
-            placeholder="Enter unit cost"
-            value={form.unitCost}
-            onChange={handleChange}
-          />
-          {errors.unitCost && <p className="text-red-600 text-sm mt-1">{errors.unitCost}</p>}
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="quantityOnHand">
-            On Hand
-          </label>
-          <input
-            className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full"
-            id="quantityOnHand"
-            name="quantityOnHand"
-            type="number"
-            placeholder="Enter quantity on hand"
-            value={form.quantityOnHand}
-            onChange={handleChange}
-          />
-          {errors.quantityOnHand && <p className="text-red-600 text-sm mt-1">{errors.quantityOnHand}</p>}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+          <div>
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="sku">
+              SKU
+            </label>
+            <input
+              className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full"
+              id="sku"
+              name="sku"
+              type="text"
+              placeholder="Enter SKU"
+              value={form.sku}
+              onChange={handleChange}
+            />
+            {errors.sku && <p className="text-red-600 text-sm mt-1">{errors.sku}</p>}
+          </div>
+          <div>
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
+              Description
+            </label>
+            <input
+              className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full"
+              id="description"
+              name="description"
+              type="text"
+              placeholder="Enter description"
+              value={form.description}
+              onChange={handleChange}
+            />
+            {errors.description && <p className="text-red-600 text-sm mt-1">{errors.description}</p>}
+          </div>
+          <div>
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="unitCost">
+              Unit Cost
+            </label>
+            <input
+              className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full"
+              id="unitCost"
+              name="unitCost"
+              type="number"
+              placeholder="Enter unit cost"
+              value={form.unitCost}
+              onChange={handleChange}
+            />
+            {errors.unitCost && <p className="text-red-600 text-sm mt-1">{errors.unitCost}</p>}
+          </div>
+          <div>
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="quantityOnHand">
+              On Hand
+            </label>
+            <input
+              className="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline w-full"
+              id="quantityOnHand"
+              name="quantityOnHand"
+              type="number"
+              placeholder="Enter quantity on hand"
+              value={form.quantityOnHand}
+              onChange={handleChange}
+            />
+            {errors.quantityOnHand && <p className="text-red-600 text-sm mt-1">{errors.quantityOnHand}</p>}
+          </div>
         </div>
         <button
           className="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
