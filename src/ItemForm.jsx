@@ -1,5 +1,6 @@
 import {useState} from "react";
 import { API_URL } from "./api";
+import LoadingNotice from "./LoadingNotice";
 
 const emptyForm = { sku: "", description: "", unitCost: "", quantityOnHand: "" };
 
@@ -115,7 +116,7 @@ export default function ItemForm({ items, setItems, loading, error, setError }) 
       </form>
 
       <div className="mt-6">
-        {loading && <p className="text-gray-600">Loading...</p>}
+        {loading && <LoadingNotice explain />}
         {error && <p className="text-red-500">Error: {error}</p>}
 
         {!loading && !error && items.length === 0 && (

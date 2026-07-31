@@ -1,6 +1,7 @@
 import {useState, useEffect, Fragment} from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 import { API_URL } from "./api";
+import LoadingNotice from "./LoadingNotice";
 
 export default function ShipmentForm({ items = [] }) {
     const [shipment, setShipment] = useState({
@@ -283,7 +284,7 @@ export default function ShipmentForm({ items = [] }) {
       </form>
 
     <div className="mt-6">
-    {loading && <p className="text-gray-600">Loading...</p>}
+    {loading && <LoadingNotice />}
     {error && <p className="text-red-500">Error: {error}</p>}
 
     {!loading && !error && shipments.length === 0 && (
