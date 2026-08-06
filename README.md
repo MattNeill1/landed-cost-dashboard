@@ -101,7 +101,7 @@ Note that Vercel preview deployments get unique hostnames that won't match the A
 
 ## Project status
 
-Built milestone by milestone as a learning project:
+Built milestone by milestone:
 
 - [x] **M1** — Static items table
 - [x] **M2** — Fetch and render live data from the API
@@ -115,7 +115,3 @@ Built milestone by milestone as a learning project:
 
 - Collapsible create forms, collapsed by default
 - Search/filter for items and shipments
-
-## License
-
-Released for portfolio and educational purposes.
